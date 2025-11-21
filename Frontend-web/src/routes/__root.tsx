@@ -8,7 +8,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <React.Fragment>
-      <div className="p-10">
+      <div className="p-4">
         <Outlet />
       </div>
     </React.Fragment>
