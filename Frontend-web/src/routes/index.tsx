@@ -1,3 +1,4 @@
+import MagicBento from "@/components/ui/custome/magicbento";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
@@ -5,5 +6,20 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-  return <div>Hello "/"!</div>;
+  return (
+    <div>
+      <MagicBento
+        textAutoHide={true}
+        enableStars={true}
+        enableSpotlight={true}
+        enableBorderGlow={false}
+        enableTilt={false}
+        enableMagnetism={false}
+        clickEffect={true}
+        spotlightRadius={300}
+        particleCount={12}
+        glowColor="255, 255, 255"
+      />
+    </div>
+  );
 }
