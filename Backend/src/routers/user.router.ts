@@ -108,4 +108,22 @@ userRouter.get("/me", (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
+userRouter.get(
+  "/google",
+  passport.authenticate("google", { scope: ["openid", "profile", "email"] })
+);
+
+userRouter.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/login?error=google_failed",
+    session: true,
+  }),
+  (req: Request, res: Response, next: NextFunction) => {
+    return res.json({
+      message: "User is signed in with google",
+    });
+  }
+);
+
 export default userRouter;

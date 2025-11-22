@@ -5,10 +5,12 @@ export const loggedinornot = (
   res: Response,
   next: NextFunction
 ) => {
-  if (!req.user) {
-    return res.json({
-      message: "Please login first",
-    });
+  if (req.isAuthenticated()) {
+    return next();
   }
-  next();
+
+  // Return 401 Unauthorized, not just JSON
+  return res.status(401).json({
+    message: "Please login first",
+  });
 };

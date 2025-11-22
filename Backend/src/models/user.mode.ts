@@ -18,6 +18,7 @@ const userSchema = new Schema<Iuser>(
       type: String,
       required: true,
     },
+    googleId: { type: String },
     name: {
       type: String,
       required: true,
