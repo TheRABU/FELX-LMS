@@ -7,7 +7,7 @@ const Navbar = () => {
   const { navigate } = useRouter();
 
   return (
-    <div className="w-full h-16 flex justify-between items-center px-4  border rounded-md">
+    <div className="w-full h-16 flex justify-between items-center px-4 border ">
       <Link to="/" className="text-2xl font-bold font-edu">
         Flex
       </Link>

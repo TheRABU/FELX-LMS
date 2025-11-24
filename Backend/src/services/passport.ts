@@ -63,7 +63,7 @@ passport.use(
 
         const newUser = new UserModel({
           googleId: profile.id,
-          name: profile.displayName,
+          name: profile.displayName.split(" ")[0],
           email: email,
         });
 

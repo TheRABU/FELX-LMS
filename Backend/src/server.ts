@@ -8,10 +8,17 @@ import socketController from "./socket/socket.ts";
 import userRouter from "./routers/user.router.ts";
 import passport from "./services/passport.ts";
 import session from "express-session";
+import cors from "cors";
 import { ENV } from "./constants/env.ts";
 
 const app = express();
 
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "*"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(
   session({
@@ -31,7 +38,7 @@ app.use(passport.session());
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: ["http://localhost:5173", "*"],
     credentials: true,
   },
 });
