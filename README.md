@@ -41,7 +41,7 @@ The backend is powered by **Bun** and **Express**.
 Create a `.env` file in the `Backend` directory with the following variables:
 
 ```env
-PORT=3000
+PORT=4000
 MONGODB_URI=mongodb://localhost:27017/felx-lms
 ```
 
