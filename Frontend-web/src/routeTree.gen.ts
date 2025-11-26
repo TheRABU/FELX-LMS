@@ -9,19 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthUserIndexRouteImport } from './routes/auth/user/index'
 import { Route as AuthSignupIndexRouteImport } from './routes/auth/signup/index'
 import { Route as AuthLoginIndexRouteImport } from './routes/auth/login/index'
+import { Route as AuthLoginSuccessIndexRouteImport } from './routes/auth/login/success/index'
+import { Route as AuthLoginFailedIndexRouteImport } from './routes/auth/login/failed/index'
 
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthUserIndexRoute = AuthUserIndexRouteImport.update({
+  id: '/auth/user/',
+  path: '/auth/user/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthSignupIndexRoute = AuthSignupIndexRouteImport.update({
@@ -34,55 +36,92 @@ const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
   path: '/auth/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthLoginSuccessIndexRoute = AuthLoginSuccessIndexRouteImport.update({
+  id: '/auth/login/success/',
+  path: '/auth/login/success/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginFailedIndexRoute = AuthLoginFailedIndexRouteImport.update({
+  id: '/auth/login/failed/',
+  path: '/auth/login/failed/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/signup': typeof AuthSignupIndexRoute
+  '/auth/user': typeof AuthUserIndexRoute
+  '/auth/login/failed': typeof AuthLoginFailedIndexRoute
+  '/auth/login/success': typeof AuthLoginSuccessIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/signup': typeof AuthSignupIndexRoute
+  '/auth/user': typeof AuthUserIndexRoute
+  '/auth/login/failed': typeof AuthLoginFailedIndexRoute
+  '/auth/login/success': typeof AuthLoginSuccessIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/signup/': typeof AuthSignupIndexRoute
+  '/auth/user/': typeof AuthUserIndexRoute
+  '/auth/login/failed/': typeof AuthLoginFailedIndexRoute
+  '/auth/login/success/': typeof AuthLoginSuccessIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/auth/login' | '/auth/signup'
+  fullPaths:
+    | '/'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/auth/user'
+    | '/auth/login/failed'
+    | '/auth/login/success'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/auth/login' | '/auth/signup'
-  id: '__root__' | '/' | '/about' | '/auth/login/' | '/auth/signup/'
+  to:
+    | '/'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/auth/user'
+    | '/auth/login/failed'
+    | '/auth/login/success'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth/login/'
+    | '/auth/signup/'
+    | '/auth/user/'
+    | '/auth/login/failed/'
+    | '/auth/login/success/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthSignupIndexRoute: typeof AuthSignupIndexRoute
+  AuthUserIndexRoute: typeof AuthUserIndexRoute
+  AuthLoginFailedIndexRoute: typeof AuthLoginFailedIndexRoute
+  AuthLoginSuccessIndexRoute: typeof AuthLoginSuccessIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/user/': {
+      id: '/auth/user/'
+      path: '/auth/user'
+      fullPath: '/auth/user'
+      preLoaderRoute: typeof AuthUserIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/signup/': {
@@ -99,14 +138,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/login/success/': {
+      id: '/auth/login/success/'
+      path: '/auth/login/success'
+      fullPath: '/auth/login/success'
+      preLoaderRoute: typeof AuthLoginSuccessIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login/failed/': {
+      id: '/auth/login/failed/'
+      path: '/auth/login/failed'
+      fullPath: '/auth/login/failed'
+      preLoaderRoute: typeof AuthLoginFailedIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
   AuthSignupIndexRoute: AuthSignupIndexRoute,
+  AuthUserIndexRoute: AuthUserIndexRoute,
+  AuthLoginFailedIndexRoute: AuthLoginFailedIndexRoute,
+  AuthLoginSuccessIndexRoute: AuthLoginSuccessIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

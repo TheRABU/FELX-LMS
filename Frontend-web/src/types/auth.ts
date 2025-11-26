@@ -9,7 +9,8 @@ export interface UserState {
   user: User | null;
   isLoading: boolean;
   error: string | null;
-  loginUser: (formData: FormData) => Promise<void>;
-  logoutUser: () => Promise<void>;
+  loginUser: (formData: FormData) => Promise<boolean>;
+  loginWithGoogle: () => Promise<void>;
+  logoutUser: () => Promise<boolean>;
   checkAuth: () => Promise<void>;
 }

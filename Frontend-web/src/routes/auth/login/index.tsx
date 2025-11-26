@@ -7,7 +7,7 @@ export const Route = createFileRoute("/auth/login/")({
 
 function RouteComponent() {
   return (
-    <div className="flex min-h-[85vh] w-full items-center justify-center p-6 md:p-10">
+    <div className="flex min-h-[85vh] w-full items-center justify-center">
       <div className="w-full max-w-sm">
         <LoginForm />
       </div>

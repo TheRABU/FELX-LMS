@@ -3,14 +3,15 @@ import type { User, UserState } from "@/types/auth.ts";
 import { persist, devtools } from "zustand/middleware";
 import { isAxiosError } from "axios";
 import { create } from "zustand";
+import { socket } from "@/services/socket";
 
-export const useBear = create<UserState>()(
+export const useUser = create<UserState>()(
   persist(
     devtools((set) => ({
       user: null,
       isLoading: false,
       error: null,
-      checkAuth: async () => {
+      checkAuth: async (): Promise<void> => {
         set({ isLoading: true });
         try {
           const { data } = await api.get<{ user: User }>("/auth/user/me");
@@ -21,7 +22,7 @@ export const useBear = create<UserState>()(
         }
       },
 
-      loginUser: async (formData) => {
+      loginUser: async (formData): Promise<boolean> => {
         set({ isLoading: true, error: null });
         const payload = Object.fromEntries(formData);
         try {
@@ -30,20 +31,31 @@ export const useBear = create<UserState>()(
             payload
           );
           set({ user: data.user, isLoading: false });
+          return true;
         } catch (error) {
           let errorMessage = "Login failed";
           if (isAxiosError(error)) {
             errorMessage = error.response?.data?.message || error.message;
           }
           set({ error: errorMessage, isLoading: false });
+          return false;
         }
       },
-      logoutUser: async () => {
+
+      loginWithGoogle: async (): Promise<void> => {
+        window.location.href =
+          import.meta.env.VITE_BACKEND_URL + "/auth/user/google";
+      },
+
+      logoutUser: async (): Promise<boolean> => {
         try {
           await api.get("/auth/user/logout");
           set({ user: null });
+          await socket.disconnect();
+          return true;
         } catch (error) {
           console.error("Logout failed", error);
+          return false;
         }
       },
     })),

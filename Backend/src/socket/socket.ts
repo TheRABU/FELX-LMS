@@ -11,6 +11,10 @@ const socketController = (io: Server) => {
     console.log("User Connected:", socket.id);
     io.emit("userCount", io.engine.clientsCount);
 
+    socket.on("request_user_count", () => {
+      socket.emit("userCount", io.engine.clientsCount);
+    });
+
     socket.on("disconnect", () => {
       setTimeout(() => {
         io.emit("userCount", io.engine.clientsCount);
