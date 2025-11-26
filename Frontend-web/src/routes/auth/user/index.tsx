@@ -27,7 +27,7 @@ function RouteComponent() {
 
   return (
     <div className="mx-auto w-full py-6">
-      <section className=" border bg-card text-card-foreground shadow-sm">
+      <section className="border bg-card text-card-foreground shadow-sm rounded-md">
         <header className="flex flex-col gap-2 border-b p-6">
           <div className="flex items-center justify-between">
             <div>

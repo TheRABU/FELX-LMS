@@ -51,7 +51,7 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className="rounded-xs">
+      <Card className="rounded-md">
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>
@@ -66,7 +66,7 @@ export function LoginForm({
                 <Input
                   id="email"
                   type="email"
-                  className="rounded-xs"
+                  className="rounded-md"
                   placeholder="user@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -86,20 +86,20 @@ export function LoginForm({
                 <Input
                   id="password"
                   type="password"
-                  className="rounded-xs"
+                  className="rounded-md"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Field>
               <Field>
-                <Button type="submit" className="rounded-xs">
+                <Button type="submit" className="rounded-md ">
                   Login
                 </Button>
                 <Button
                   variant="outline"
                   type="button"
-                  className="rounded-xs"
+                  className="rounded-md"
                   onClick={handleGoogleOnClick}
                 >
                   Login with Google

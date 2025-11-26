@@ -9,7 +9,7 @@ const Navbar = () => {
   const user = useUser((state) => state.user);
 
   return (
-    <div className="w-full h-16 flex justify-between items-center px-4 border ">
+    <div className="w-full h-16 flex justify-between items-center px-4 border rounded-md">
       <Link to="/" className="text-2xl font-bold font-edu">
         Flex
       </Link>
