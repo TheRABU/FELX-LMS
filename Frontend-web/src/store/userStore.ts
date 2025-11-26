@@ -10,7 +10,7 @@ export const useUser = create<UserState>()(
       user: null,
       isLoading: false,
       error: null,
-      checkAuth: async () => {
+      checkAuth: async (): Promise<void> => {
         set({ isLoading: true });
         try {
           const { data } = await api.get<{ user: User }>("/auth/user/me");
@@ -21,7 +21,7 @@ export const useUser = create<UserState>()(
         }
       },
 
-      loginUser: async (formData) => {
+      loginUser: async (formData): Promise<boolean> => {
         set({ isLoading: true, error: null });
         const payload = Object.fromEntries(formData);
         try {
@@ -30,26 +30,30 @@ export const useUser = create<UserState>()(
             payload
           );
           set({ user: data.user, isLoading: false });
+          return true;
         } catch (error) {
           let errorMessage = "Login failed";
           if (isAxiosError(error)) {
             errorMessage = error.response?.data?.message || error.message;
           }
           set({ error: errorMessage, isLoading: false });
+          return false;
         }
       },
 
-      loginWithGoogle: async () => {
+      loginWithGoogle: async (): Promise<void> => {
         window.location.href =
           import.meta.env.VITE_BACKEND_URL + "/auth/user/google";
       },
 
-      logoutUser: async () => {
+      logoutUser: async (): Promise<boolean> => {
         try {
           await api.get("/auth/user/logout");
           set({ user: null });
+          return true;
         } catch (error) {
           console.error("Logout failed", error);
+          return false;
         }
       },
     })),

@@ -14,7 +14,7 @@ export const ProfileCard = () => {
 
   return (
     <Button
-      className={`${admin === "admin" ? "bg-white border border-red-500/60 hover:bg-red-500/30 dark:bg-red-500/30 dark:border-red-500/60 dark:border dark:text-white dark:hover:bg-red-500/30 dark:hover:border-red-500/90" : ""} flex items-center gap-2`}
+      className={`${admin === "admin" ? "bg-white border border-red-500/60 hover:bg-red-500/30 dark:bg-red-500/30 dark:border-red-500/60 dark:border dark:text-white dark:hover:bg-red-500/30 dark:hover:border-red-500/90" : "bg-white border border-green-500/60 hover:bg-green-500/30 dark:bg-green-500/30 dark:border-green-500/60 dark:border dark:text-white dark:green:bg-red-500/30 dark:hover:border-green-500/90"} flex items-center gap-2`}
       onClick={handleProfilebtnClick}
     >
       <h1>{user}</h1>
