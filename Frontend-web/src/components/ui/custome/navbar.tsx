@@ -11,6 +11,22 @@ const Navbar = () => {
       <Link to="/" className="text-2xl font-bold font-edu">
         Flex
       </Link>
+      <div className="">
+        <ul className="flex justify-start items-center space-x-3">
+          <Link
+            className="px-3 py-1 bg-orange-500 text-white rounded-md"
+            to={"/"}
+          >
+            Home
+          </Link>
+          <li className="px-3 py-1 bg-orange-500 text-white rounded-md">
+            About
+          </li>
+          <li className="px-3 py-1 bg-orange-500 text-white rounded-md">
+            Contact
+          </li>
+        </ul>
+      </div>
       <div className="flex flex-row justify-center items-center gap-4">
         <ProfileCard />
         <Button
