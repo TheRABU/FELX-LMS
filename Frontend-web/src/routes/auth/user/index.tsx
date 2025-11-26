@@ -7,7 +7,7 @@ export const Route = createFileRoute("/auth/user/")({
 
 function RouteComponent() {
   const user = useUser((state) => state.user);
-  const nativator = useNavigate();
+  const natigator = useNavigate();
   const logoutUser = useUser((state) => state.logoutUser);
 
   if (!user) {
@@ -19,7 +19,8 @@ function RouteComponent() {
   }
   const handleProfileLogoutClick = () => {
     logoutUser();
-    nativator({ to: "/" });
+    
+    natigator({ to: "/" });
   };
 
   const createdAt = new Date(user.createdAt).toLocaleDateString();

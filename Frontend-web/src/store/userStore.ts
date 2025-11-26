@@ -3,6 +3,7 @@ import type { User, UserState } from "@/types/auth.ts";
 import { persist, devtools } from "zustand/middleware";
 import { isAxiosError } from "axios";
 import { create } from "zustand";
+import { socket } from "@/services/socket";
 
 export const useUser = create<UserState>()(
   persist(
@@ -50,6 +51,7 @@ export const useUser = create<UserState>()(
         try {
           await api.get("/auth/user/logout");
           set({ user: null });
+          await socket.disconnect();
           return true;
         } catch (error) {
           console.error("Logout failed", error);
