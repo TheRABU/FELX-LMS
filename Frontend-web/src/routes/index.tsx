@@ -7,6 +7,7 @@ export const Route = createFileRoute("/")({
 
 function RouteComponent() {
   return (
+    //TODO: Place holder hero section
     <div>
       <MagicBento
         textAutoHide={true}

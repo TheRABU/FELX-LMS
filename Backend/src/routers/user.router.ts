@@ -113,16 +113,15 @@ userRouter.get(
   passport.authenticate("google", { scope: ["openid", "profile", "email"] })
 );
 
+const clientUrl = process.env.WEB_CLIENT_URL;
 userRouter.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "/login?error=google_failed",
+    failureRedirect: `${clientUrl}/auth/login/failed`,
     session: true,
   }),
   (req: Request, res: Response, next: NextFunction) => {
-    return res.json({
-      message: "User is signed in with google",
-    });
+    return res.redirect(`${clientUrl}/auth/login/success`);
   }
 );
 

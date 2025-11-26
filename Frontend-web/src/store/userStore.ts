@@ -4,7 +4,7 @@ import { persist, devtools } from "zustand/middleware";
 import { isAxiosError } from "axios";
 import { create } from "zustand";
 
-export const useBear = create<UserState>()(
+export const useUser = create<UserState>()(
   persist(
     devtools((set) => ({
       user: null,
@@ -38,6 +38,12 @@ export const useBear = create<UserState>()(
           set({ error: errorMessage, isLoading: false });
         }
       },
+
+      loginWithGoogle: async () => {
+        window.location.href =
+          import.meta.env.VITE_BACKEND_URL + "/auth/user/google";
+      },
+
       logoutUser: async () => {
         try {
           await api.get("/auth/user/logout");
